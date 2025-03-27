@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Job Seek Indonesia</title>
+	<link rel="stylesheet" href="./dist/css/styles.css">
+	<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+	<script src="https://cdn.tailwindcss.com"></script>
+	<!-- JIT SUPPORT, for using peer-* below -->
+	<script src="https://unpkg.com/tailwindcss-jit-cdn"></script>
+	<link   rel="stylesheet"   href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+	<link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+    <!-- Bootstrap CSS 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">-->
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./dist/css/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+    
+    <style>
+.animate-fade-in-left {
+    animation: fadeInLeft 0.5s ease-out;
+}
+
+.animate-fade-in-right {
+    animation: fadeInRight 0.5s ease-out;
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+table {
+    border: 1px solid #e5e7eb;
+}
+
+th, td {
+    border: 1px solid #e5e7eb;
+    padding: 0.75rem;
+}
+</style>
+</head>
+<body>
+    <!-- Navbar -->
+	<header>
+	<nav class="bg-gradient-to-br from-purple-600 to-blue-500 border-gray-200 dark:bg-gray-900 text-white">
+	<div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+		<a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
+			<span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Job Seek Indonesia</span>
+		</a>
+		<button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-white-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-white-100 dark:focus:ring-white-600" aria-controls="navbar-default" aria-expanded="false">
+			<span class="sr-only">Open main menu</span>
+			<svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+				<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+			</svg>
+		</button>
+		<div class="hidden w-full md:block md:w-auto" id="navbar-default">
+		<ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-transparent dark:bg-transparent md:dark:bg-transparent dark:border-transparent">
+			<li>
+			<a href="index.html" class="block py-2 px-3 text-white rounded-sm md:bg-transparent md:text-white md:p-0 dark:text-white md:dark:text-white" aria-current="page">Home</a>
+			</li>
+			<li>
+			<a href="#" class="block py-2 px-3 text-white rounded-sm hover:bg-transparent md:hover:bg-transparent md:border-0 md:hover:text-white md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Layanan</a>
+			</li>
+			<li>
+			<a href="#.html" class="block py-2 px-3 text-white rounded-sm hover:bg-transparent md:hover:bg-transparent md:border-0 md:hover:text-white md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Price List</a>
+			</li>
+			<li>
+			<a href="#" class="block py-2 px-3 text-white rounded-sm hover:bg-transparent md:hover:bg-transparent md:border-0 md:hover:text-white md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Kontak</a>
+			</li>
+		</ul>
+		</div>
+	</div>
+	</nav>
+	</header>
+    <!-- Section 1: Price List -->
+<section id="price-list" class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-8 animate-fade-in">Paket Iklan Lowongan Pekerjaan</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Paket 1 -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden animate-fade-in-left">
+                <div class="bg-blue-600 text-white text-center py-6">
+                    <h3 class="text-2xl font-bold">STARTER</h3>
+                </div>
+                <div class="p-6 flex flex-col h-full">
+                    <ul class="space-y-4 mb-6 flex-grow">
+						<li class="flex items-center">
+                            <i class="fas fa-globe text-blue-600 mr-2"></i>
+                            1x Post di Website
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-hashtag text-blue-600 mr-2"></i>
+                            1x Post Feed Instagram
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-tag text-blue-600 mr-2"></i>
+                            Tag Akun Instagram
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-people-arrows text-blue-600 mr-2"></i>
+                            1x Post Channel Instagram
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-user-friends text-blue-600 mr-2"></i>
+                            1x Post Facebook
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-paper-plane text-blue-600 mr-2"></i>
+                            1x Post Channel Telegram
+                        </li>
+                        <!-- Item lainnya... -->
+                    </ul>
+                    <div class="text-center mt-auto">
+                        <p class="text-gray-500 line-through">Rp 125.000</p>
+                        <p class="text-2xl font-bold text-blue-600 my-4">Rp 45.000</p>
+                        <button class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition">
+                            Pilih Paket
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paket 2 -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden animate-fade-in-left">
+                <div class="bg-blue-600 text-white text-center py-6">
+                    <h3 class="text-2xl font-bold">BASIC</h3>
+                </div>
+                <div class="p-6 flex flex-col h-full">
+                   <ul class="space-y-4 mb-6 flex-grow">
+						<li class="flex items-center">
+                            <i class="fas fa-globe text-blue-600 mr-2"></i>
+                            1x Post di Website
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-hashtag text-blue-600 mr-2"></i>
+                            2x Post Feed Instagram
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-tag text-blue-600 mr-2"></i>
+                            Tag Akun Instagram
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-people-arrows text-blue-600 mr-2"></i>
+                            1x Post Channel Instagram
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-user-friends text-blue-600 mr-2"></i>
+                            2x Post Facebook
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-paper-plane text-blue-600 mr-2"></i>
+                            1x Post Channel Telegram
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-palette text-blue-600 mr-2"></i>
+                            Free Design Poster
+                        </li>
+                        <!-- Item lainnya... -->
+                    </ul>
+                    <div class="text-center mt-auto">
+                        <p class="text-gray-500 line-through">Rp 175.000</p>
+                        <p class="text-2xl font-bold text-blue-600 my-4">Rp 95.000</p>
+                        <button class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition">
+                            Pilih Paket
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Paket 3 -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden animate-fade-in-left">
+                <div class="bg-blue-600 text-white text-center py-6">
+                    <h3 class="text-2xl font-bold">PREMIUM</h3>
+                </div>
+                <div class="p-6 flex flex-col h-full">
+                    <ul class="space-y-4 mb-6 flex-grow">
+						<li class="flex items-center">
+                            <i class="fas fa-globe text-blue-600 mr-2"></i>
+                            1x Post di Website
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-hashtag text-blue-600 mr-2"></i>
+                            4x Post Feed Instagram
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-history text-blue-600 mr-2"></i>
+                            6x Post Story Instagram
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-tag text-blue-600 mr-2"></i>
+                            Tag Akun Instagram
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-people-arrows text-blue-600 mr-2"></i>
+                            1x Post Channel Instagram
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-user-friends text-blue-600 mr-2"></i>
+                            4x Post Facebook
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-paper-plane text-blue-600 mr-2"></i>
+                            1x Post Channel Telegram
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-palette text-blue-600 mr-2"></i>
+                            Free Design Poster
+                        </li>
+                        <!-- Item lainnya... -->
+                    </ul>
+                    <div class="text-center mt-auto">
+                        <p class="text-gray-500 line-through">Rp 250.000</p>
+                        <p class="text-2xl font-bold text-blue-600 my-4">Rp 135.000</p>
+                        <button class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition">
+                            Pilih Paket
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<section id="registration" class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <!-- Bagian Kiri: Ilustrasi -->
+            <div class="text-center animate-fade-in-left">
+                <img src="illustration-registration.png" alt="Ilustrasi Pendaftaran" class="max-w-xs md:max-w-md mx-auto">
+                <h4 class="text-xl font-bold mt-6">Daftar Sekarang!</h4>
+                <p class="text-gray-600 mt-2 max-w-md mx-auto">
+                    Bergabunglah dengan Job Seek Indonesia dan dapatkan layanan terbaik untuk kebutuhan iklan lowongan kerja Anda.
+                </p>
+            </div>
+
+            <!-- Bagian Kanan: Form -->
+            <div class="animate-fade-in-right">
+                <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                    <h2 class="text-2xl font-bold text-center mb-6">Form Pendaftaran</h2>
+                    <form id="registrationForm" action="send-message.php" method="POST" class="space-y-6">
+                        
+                        <!-- Nama Lengkap -->
+                        <div>
+                            <label for="name" class="block text-gray-700 mb-2">Nama Lengkap:</label>
+                            <input type="text" id="name" name="nama" 
+                                   class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+                                   required>
+                        </div>
+
+                        <!-- Email -->
+                        <div>
+                            <label for="email" class="block text-gray-700 mb-2">Email:</label>
+                            <input type="email" id="email" name="email" 
+                                   class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500" 
+                                   required>
+                        </div>
+
+                        <!-- WhatsApp -->
+                        <div>
+                            <label for="whatsapp" class="block text-gray-700 mb-2">Nomor WhatsApp Aktif:</label>
+                            <input type="tel" id="whatsapp" name="whatsapp" 
+                                   class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500" 
+                                   required>
+                        </div>
+
+                        <!-- Akun Instagram Utama -->
+                        <div>
+                            <label for="mainAccount" class="block text-gray-700 mb-2">Akun Instagram Utama:</label>
+                            <select id="mainAccount" name="mainAccount" 
+                                    class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500" 
+                                    required>
+                                <option value="" disabled selected>Pilih akun utama</option>
+                                <!-- Opsi tetap sama -->
+                            </select>
+                        </div>
+
+                        <!-- Akun Tambahan -->
+                        <div>
+                            <h5 class="text-gray-700 mb-3">Akun Tambahan (+ Rp 5.000/akun):</h5>
+                            <div class="overflow-x-auto">
+                                <table class="w-full border-collapse">
+                                    <thead class="bg-gray-50">
+                                        <tr>
+                                            <th class="border p-2 text-left">Pilih</th>
+                                            <th class="border p-2 text-left">Nama Akun</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="extraAccounts">
+                                        <!-- Baris tabel tetap sama -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Pilih Paket -->
+                        <div>
+                            <label for="package" class="block text-gray-700 mb-2">Pilih Paket:</label>
+                            <select id="package" name="package" 
+                                    class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500" 
+                                    required>
+                                <option value="35000">Paket 1 - Rp 35.000</option>
+                                <option value="45000">Paket 2 - Rp 45.000</option>
+                                <option value="75000">Paket 3 - Rp 75.000</option>
+                            </select>
+                        </div>
+
+                        <!-- Total Tagihan -->
+                        <div class="text-lg font-semibold">
+                            <p>Total Tagihan: <span id="totalCost" class="text-blue-600">Rp 35.000</span></p>
+                        </div>
+
+                        <!-- Tombol Daftar -->
+                        <button type="submit" 
+                                class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                            Daftar
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<style>
+/* Tambahkan di CSS */
+.animate-fade-in {
+    animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Animasi lainnya serupa */
+</style>
+    <!-- Bootstrap JS 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
+    <script src="script.js"></script>
+
+</body>
+</html>
