@@ -249,12 +249,28 @@ th, td {
     <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <!-- Bagian Kiri: Ilustrasi -->
-            <div class="text-center animate-fade-in-left">
-                <img src="illustration-registration.png" alt="Ilustrasi Pendaftaran" class="max-w-xs md:max-w-md mx-auto">
-                <h4 class="text-xl font-bold mt-6">Daftar Sekarang!</h4>
-                <p class="text-gray-600 mt-2 max-w-md mx-auto">
-                    Bergabunglah dengan Job Seek Indonesia dan dapatkan layanan terbaik untuk kebutuhan iklan lowongan kerja Anda.
-                </p>
+            <div class="animate-fade-in-left">
+                <svg xmlns="http://www.w3.org/2000/svg" class="max-w-[100px] md:max-w-[200px] mx-auto" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+				<path class="fill-blue-500" fill-rule="evenodd" d="M3 3.5A1.5 1.5 0 0 1 4.5 2h6.879a1.5 1.5 0 0 1 1.06.44l4.122 4.12A1.5 1.5 0 0 1 17 7.622V16.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 3 16.5v-13Zm10.857 5.691a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 0 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z" clip-rule="evenodd" />
+				</svg>
+
+                <h3 class="text-xl font-bold mt-6 text-left max-w-md mx-auto ">Syarat dan Ketentuan Pendaftaran</h4>
+                <!--<div class=" mt-2 max-w-md mx-auto text-left">-->
+				<div class="p-6 flex flex-col h-full text-gray-600 text-left ">
+                    <ul class="space-y-4 mb-6 flex-grow">
+						<li class="flex items-center"> <i class="fas fa-check text-blue-600 mr-2"></i>Iklan tidak memiliki batas waktu tayang unlimited, tetapi akan tergeser jika ada iklan baru.</li>
+						<li class="flex items-center"> <i class="fas fa-check text-blue-600 mr-2"></i>Jeda tiap posting adalah 3 hari sekali untuk paket iklan > 2x posting, kecuali permintaan khusus.</li>
+						<li class="flex items-center"> <i class="fas fa-check text-blue-600 mr-2"></i>Bisa request jadwal posting dengan jeda maksimal 3 hari dari posting sebelumnya.</li>
+						<li class="flex items-center"> <i class="fas fa-check text-blue-600 mr-2"></i>Jam posting ditentukan ole admin sesuai antrian.</li>
+						<li class="flex items-center"> <i class="fas fa-check text-blue-600 mr-2"></i>Posting di website dan Telegram akan dipublish minimal 1 hari setelah materi diterima.</li>
+						<li class="flex items-center"> <i class="fas fa-check text-blue-600 mr-2"></i>Posting di Channel Instagram lebih diutamakan dibanding feed.</li>
+						<li class="flex items-center"> <i class="fas fa-check text-blue-600 mr-2"></i>Iklan di website akan tayang selama 30 hari, setelah itu otomatis nonaktif.</li>
+						<li class="flex items-center"> <i class="fas fa-check text-blue-600 mr-2"></i>Materi iklan dan poster bebas (bisa dari klien atau dibuat oleh tim).</li>
+						<li class="flex items-center"> <i class="fas fa-check text-blue-600 mr-2"></i>Invoice iklan tersedia jika diperlukan untuk klaim ke pimpinan perusahaan. </li>
+						<li class="flex items-center"> <i class="fas fa-check text-blue-600 mr-2"></i>Free desain poster tidak dapat direvisi (kecuali jika ada typo atau tambahan informasi penting.</li>
+						<li class="flex items-center"> <i class="fas fa-check text-blue-600 mr-2"></i>Harga dapat berubah sewaktu-waktu sesuai dengan jumlah peningkatan followers.</li>
+                    </ul>
+                </div>
             </div>
 
             <!-- Bagian Kanan: Form -->
@@ -294,6 +310,13 @@ th, td {
                                     class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500" 
                                     required>
                                 <option value="" disabled selected>Pilih akun utama</option>
+                                <option value="loker.engineering">@loker.engineering</option>  
+                                <option value="lokerdigitalmarketing">@lokerdigitalmarketing</option>  
+                                <option value="loker_mengajar">@loker_mengajar</option>  
+                                <option value="lokerjawatengah_official">@lokerjawatengah_official</option>  
+                                <option value="loker_akuntansikeuangan">@loker_akuntansikeuangan</option>  
+                                <option value="lokerjawatimur_official">@lokerjawatimur_official</option>  
+                                <option value="loker_dokterkesehatan">@loker_dokterkesehatan</option>
                                 <!-- Opsi tetap sama -->
                             </select>
                         </div>
@@ -322,9 +345,9 @@ th, td {
                             <select id="package" name="package" 
                                     class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500" 
                                     required>
-                                <option value="35000">Paket 1 - Rp 35.000</option>
-                                <option value="45000">Paket 2 - Rp 45.000</option>
-                                <option value="75000">Paket 3 - Rp 75.000</option>
+                                <option value="35000">STARTER - Rp 45.000</option>
+                                <option value="45000">BASIC - Rp 95.000</option>
+                                <option value="75000">PREMIUM - Rp 135.000</option>
                             </select>
                         </div>
 
@@ -345,7 +368,6 @@ th, td {
     </div>
 </section>
 
-<!-- Section 3: Footer -->
     <footer id="footer" class="py-12 bg-gray-800 text-white">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -382,7 +404,6 @@ th, td {
             </div>
         </div>
     </footer>
-
 <style>
 /* Tambahkan di CSS */
 .animate-fade-in {
