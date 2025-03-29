@@ -1,0 +1,36 @@
+    /* Custom Animations */
+    @keyframes fade-in {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slide-up {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-fade-in {
+        animation: fade-in 1s ease forwards;
+    }
+
+    .animate-slide-up {
+        animation: slide-up 0.8s ease forwards;
+    }
+
+    .delay-100 { animation-delay: 100ms; }
+    .delay-200 { animation-delay: 200ms; }
+    .delay-300 { animation-delay: 300ms; }
+
+	/* Swiper Customization - Bigger Bullets */
+.swiper-pagination-bullet {
+    @apply bg-white/30 w-8 h-8 transition-all duration-300 rounded-full mx-2 scale-100;
+}
+
+.swiper-pagination-bullet-active {
+    @apply bg-sky-400 w-10 h-10 scale-125 ring-4 ring-sky-200/50;
+}
+
+/* Untuk spacing yang lebih longgar */
+.swiper-pagination {
+    @apply gap-x-4 !important;
+}
