@@ -1,186 +1,88 @@
-document.addEventListener("DOMContentLoaded", function () {
- // Mengambil elemen-elemen form pendaftaran
- const mainAccountSelect = document.getElementById("mainAccount");
- const extraAccountsTable = document.getElementById("extraAccounts");
- const packageSelect = document.getElementById("package");
- const totalCostDisplay = document.getElementById("totalCost");
- const form = document.getElementById("registrationForm");
+document.addEventListener('DOMContentLoaded', () => {
+    // Data Akun Tambahan
+    const extraAccounts = [
+        { id: 'acc1', name: '@loker.engineering' },
+        { id: 'acc2', name: '@lokerdigitalmarketing' },
+        { id: 'acc3', name: '@loker_mengajar' },
+        { id: 'acc4', name: '@lokerjawatengah_official' },
+        { id: 'acc5', name: '@loker_akuntansikeuangan' },
+        { id: 'acc6', name: '@lokerjawatimur_official' },
+        { id: 'acc7', name: '@loker_dokterkesehatan' }
+    ];
 
- // Daftar akun Instagram yang tersedia
- const accounts = [
-     "loker.engineering",
-     "lokerdigitalmarketing",
-     "loker_mengajar",
-     "lokerjawatengah_official",
-     "loker_akuntansikeuangan",
-     "lokerjawatimur_official",
-     "loker_dokterkesehatan"
- ];
-
- // Fungsi untuk memperbarui daftar akun tambahan
- function updateExtraAccounts() {
-     extraAccountsTable.innerHTML = "";
-     const selectedMain = mainAccountSelect.value;
-     const filteredAccounts = accounts.filter(acc => acc !== selectedMain);
-
-     filteredAccounts.forEach(account => {
-         const row = document.createElement("tr");
-         const checkboxCell = document.createElement("td");
-         const checkbox = document.createElement("input");
-         checkbox.type = "checkbox";
-         checkbox.value = account;
-         checkbox.classList.add("extraAccountCheckbox");
-         checkboxCell.appendChild(checkbox);
-
-         const nameCell = document.createElement("td");
-         nameCell.textContent = account;
-
-         row.appendChild(checkboxCell);
-         row.appendChild(nameCell);
-         extraAccountsTable.appendChild(row);
-     });
-
-     updateTotal(); // Perbarui total harga setelah daftar akun berubah
- }
-
- // Fungsi untuk menghitung total harga berdasarkan paket dan akun tambahan
- function updateTotal() {
-     let selectedPackagePrice = parseInt(packageSelect.value);
-     let additionalAccounts = document.querySelectorAll(".extraAccountCheckbox:checked").length;
-     let totalCost = selectedPackagePrice + (additionalAccounts * 5000);
-     totalCostDisplay.textContent = `Rp ${totalCost.toLocaleString("id-ID")}`;
- }
-
- // Event listener untuk form submit
- form.addEventListener("submit", function (e) {
-     e.preventDefault();
-
-     // Ambil data dari form
-     const formData = new FormData(form);
-     formData.append("total", totalCostDisplay.textContent);
-
-     // Kirim data ke PHP menggunakan Fetch API
-     fetch("send-message.php", {
-         method: "POST",
-         body: formData,
-     })
-     .then(response => response.json())
-     .then(data => {
-         // Tampilkan notifikasi dari PHP
-         alert(data.alert);
-     })
-     .catch(error => {
-         console.error("Error:", error);
-         alert("Terjadi kesalahan saat mengirim data.");
-     });
- });
-
- // Event listener untuk perubahan pada dropdown akun utama
- mainAccountSelect.addEventListener("change", updateExtraAccounts);
-
- // Event listener untuk perubahan paket iklan
- packageSelect.addEventListener("change", updateTotal);
-
- // Event listener untuk perubahan pada daftar akun tambahan
- extraAccountsTable.addEventListener("change", updateTotal);
-
- // Inisialisasi daftar akun tambahan pertama kali
- updateExtraAccounts();
-
-// Mengambil elemen-elemen yang diperlukan
-const carousel = document.querySelector(".carousel"); // Container carousel
-const items = document.querySelectorAll(".carousel-item"); // Semua item carousel
-const prevButton = document.querySelector(".carousel-button.prev"); // Tombol Previous
-const nextButton = document.querySelector(".carousel-button.next"); // Tombol Next
-const dotsContainer = document.querySelector(".carousel-dots"); // Container untuk dots
-
-let currentIndex = 0; // Indeks slide saat ini
-const itemsPerSlide = 4; // Jumlah item yang ditampilkan per slide
-let autoSlideInterval; // Variabel untuk menyimpan interval auto-slide
-
-// Fungsi untuk membuat dots (indikator slide)
-function createDots() {
-    // Loop melalui setiap item carousel dan buat dot yang sesuai
-    items.forEach((_, index) => {
-        const dot = document.createElement("div");
-        dot.classList.add("carousel-dot");
-        if (index === currentIndex) dot.classList.add("active"); // Dot aktif sesuai dengan slide saat ini
-        dot.addEventListener("click", () => moveToSlide(index)); // Pindah ke slide saat dot diklik
-        dotsContainer.appendChild(dot); // Tambahkan dot ke container
+    // Render Akun Tambahan
+    const tbody = document.getElementById('extraAccounts');
+    extraAccounts.forEach(acc => {
+        const row = document.createElement('tr');
+        row.className = 'hover:bg-gray-50';
+        row.innerHTML = `
+            <td class="border p-2">
+                <input type="checkbox" name="extraAccounts[]" value="${acc.id}" 
+                    class="extra-account" data-price="5000">
+            </td>
+            <td class="border p-2">${acc.name}</td>
+        `;
+        tbody.appendChild(row);
     });
-}
 
-// Fungsi untuk memperbarui dots aktif
-function updateDots() {
-    const dots = document.querySelectorAll(".carousel-dot");
-    dots.forEach((dot, index) => {
-        dot.classList.toggle("active", index === currentIndex); // Set dot aktif sesuai dengan slide saat ini
+    // Hitung Total
+    function calculateTotal() {
+        const packagePrice = parseInt(document.getElementById('package').value);
+        const extraAccounts = document.querySelectorAll('.extra-account:checked');
+        const extraCost = extraAccounts.length * 5000;
+        return packagePrice + extraCost;
+    }
+
+    // Update Tampilan Total
+    function updateTotal() {
+        const total = calculateTotal();
+        document.getElementById('totalCost').textContent = `Rp ${total.toLocaleString()}`;
+        document.getElementById('submitBtn').disabled = total < 45000;
+    }
+
+    // Event Listeners
+    document.getElementById('package').addEventListener('change', updateTotal);
+    document.querySelectorAll('.extra-account').forEach(checkbox => {
+        checkbox.addEventListener('change', updateTotal);
     });
-}
 
-// Fungsi untuk berpindah ke slide tertentu
-function moveToSlide(index) {
-    currentIndex = index; // Update indeks slide
-    updateCarousel(); // Perbarui tampilan carousel
-    updateDots(); // Perbarui dots
-}
+    // Validasi Form
+    document.getElementById('registrationForm').addEventListener('submit', (e) => {
+        let isValid = true;
 
-// Fungsi untuk memperbarui tampilan carousel
-function updateCarousel() {
-    const offset = -currentIndex * (100 / itemsPerSlide); // Hitung offset untuk translateX
-    carousel.style.transform = `translateX(${offset}%)`; // Geser carousel sesuai offset
-}
+        // Validasi Nama
+        const nameInput = document.getElementById('name');
+        if (nameInput.value.length < 3) {
+            document.getElementById('nameError').classList.remove('hidden');
+            isValid = false;
+        } else {
+            document.getElementById('nameError').classList.add('hidden');
+        }
 
-// Fungsi untuk berpindah ke slide sebelumnya
-function prevSlide() {
-    if (currentIndex > 0) {
-        currentIndex--; // Kurangi indeks jika bukan di slide pertama
-    } else {
-        // Jika di slide pertama, pindah ke slide terakhir
-        currentIndex = items.length - itemsPerSlide;
-    }
-    updateCarousel(); // Perbarui tampilan carousel
-    updateDots(); // Perbarui dots
-}
+        // Validasi Email
+        const emailInput = document.getElementById('email');
+        if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(emailInput.value)) {
+            document.getElementById('emailError').classList.remove('hidden');
+            isValid = false;
+        } else {
+            document.getElementById('emailError').classList.add('hidden');
+        }
 
-// Fungsi untuk berpindah ke slide berikutnya
-function nextSlide() {
-    if (currentIndex < items.length - itemsPerSlide) {
-        currentIndex++; // Tambah indeks jika bukan di slide terakhir
-    } else {
-        // Jika di slide terakhir, pindah ke slide pertama
-        currentIndex = 0;
-    }
-    updateCarousel(); // Perbarui tampilan carousel
-    updateDots(); // Perbarui dots
-}
+        // Validasi WhatsApp
+        const whatsappInput = document.getElementById('whatsapp');
+        if (!/^08[0-9]{9,12}$/.test(whatsappInput.value)) {
+            document.getElementById('whatsappError').classList.remove('hidden');
+            isValid = false;
+        } else {
+            document.getElementById('whatsappError').classList.add('hidden');
+        }
 
-// Fungsi untuk memulai auto-slide
-function startAutoSlide() {
-    autoSlideInterval = setInterval(nextSlide, 5000); // Pindah ke slide berikutnya setiap 5 detik
-}
+        if (!isValid) {
+            e.preventDefault();
+            alert('Silakan periksa kembali data yang Anda masukkan!');
+        }
+    });
 
-// Fungsi untuk menghentikan auto-slide
-function stopAutoSlide() {
-    clearInterval(autoSlideInterval); // Hentikan interval auto-slide
-}
-//fungsi toggle menu
-function toggleMenu() {
-    const navLinks = document.querySelector('.nav-links');
-    navLinks.classList.toggle('active');
-}
-
-// Event listener untuk menghentikan auto-slide saat kursor berada di atas carousel
-carousel.addEventListener("mouseenter", stopAutoSlide);
-// Event listener untuk memulai kembali auto-slide saat kursor meninggalkan carousel
-carousel.addEventListener("mouseleave", startAutoSlide);
-
-// Event listener untuk tombol "Previous"
-prevButton.addEventListener("click", prevSlide);
-// Event listener untuk tombol "Next"
-nextButton.addEventListener("click", nextSlide);
-
-// Inisialisasi dots dan mulai auto-slide
-createDots();
-startAutoSlide();
+    // Inisialisasi Total
+    updateTotal();
 });
