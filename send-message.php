@@ -1,47 +1,48 @@
 <?php
-// Pastikan tidak ada output sebelum header
-if (ob_get_level()) ob_clean();
-header('Content-Type: application/json');
+// Validasi request method
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
+    die('Method not allowed');
+}
 
-// Konfigurasi API Fonnte
-$fonnte_api_key = 'Du1Z92a8Km6Adyoe2xrcP6N9a7LuDkSZ92z1'; // Ganti dengan API key Fonnte Anda
-$admin_number = '6289513366789'; // Ganti dengan nomor admin tujuan
+// Konfigurasi dasar
+$recipient_email = 'admin@example.com'; // Ganti dengan email penerima
+$redirect_url = 'thank-you.html'; // Halaman setelah submit berhasil
 
-// Ambil data dari form
-try {
-    // Validasi input
-    $required = ['nama', 'email', 'whatsapp', 'mainAccount', 'package'];
-    foreach ($required as $field) {
-        if (empty($_POST[$field])) {
-            throw new Exception("Field $field harus diisi");
-        }
-    }
+// Ambil dan sanitasi data
+$data = [
+    'nama' => htmlspecialchars($_POST['nama'] ?? '', ENT_QUOTES, 'UTF-8'),
+    'email' => filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL),
+    'whatsapp' => preg_replace('/[^0-9]/', '', $_POST['whatsapp'] ?? ''),
+    'mainAccount' => htmlspecialchars($_POST['mainAccount'] ?? '', ENT_QUOTES, 'UTF-8'),
+    'package' => filter_input(INPUT_POST, 'package', FILTER_SANITIZE_NUMBER_INT),
+    'extraAccounts' => isset($_POST['extraAccounts']) ? 
+        array_map(function($item) {
+            return htmlspecialchars($item, ENT_QUOTES, 'UTF-8');
+        }, $_POST['extraAccounts']) 
+        : [],
+];
+// Validasi data wajib
+$errors = [];
+if (empty($data['nama'])) $errors[] = 'Nama lengkap harus diisi';
+if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) $errors[] = 'Email tidak valid';
+if (!preg_match('/^08[0-9]{9,12}$/', $data['whatsapp'])) $errors[] = 'Nomor WhatsApp tidak valid';
 
-    // Proses data
-    $data = [
-        'nama' => filter_var($_POST['nama'], FILTER_SANITIZE_STRING),
-        'email' => filter_var($_POST['email'], FILTER_SANITIZE_EMAIL),
-        'whatsapp' => filter_var($_POST['whatsapp'], FILTER_SANITIZE_STRING),
-        'mainAccount' => filter_var($_POST['mainAccount'], FILTER_SANITIZE_STRING),
-        'package' => filter_var($_POST['package'], FILTER_SANITIZE_STRING),
-        'total' => filter_var($_POST['total'], FILTER_SANITIZE_STRING),
-        'extraAccounts' => $_POST['extraAccounts'] ?? []
-    ];
+// Jika ada error
+if (!empty($errors)) {
+    session_start();
+    $_SESSION['form_errors'] = $errors;
+    header('Location: index.html#registration');
+    exit;
+}
 
-// Format pesan untuk admin
-$message = "📝 *PENDAFTARAN BARU* 📝\n\n"
-    . "Nama: $nama\n"
-    . "Email: $email\n"
-    . "WhatsApp: $whatsapp\n"
-    . "Akun Utama: @$main_account\n"
-    . "Paket: " . getPackageName($package) . "\n"
-    . "Akun Tambahan: " . (count($extra_accounts) > 0 ? implode(', ', $extra_accounts) : 'Tidak ada') . "\n"
-    . "Total Tagihan: $total\n\n"
-    . "Segera konfirmasi pembayaran!";
+// Kirim notifikasi WhatsApp via Fonte API
+$fonte_api_key = 'xxxxxxx';
+$admin = 'xxxxxxx';
+$whatsapp_number = $data['whatsapp'];
+$message = "Halo {$data['nama']}, pendaftaran Anda telah berhasil. Terima kasih!";
 
-// Kirim ke API Fonnte
 $curl = curl_init();
-
 curl_setopt_array($curl, [
     CURLOPT_URL => 'https://api.fonnte.com/send',
     CURLOPT_RETURNTRANSFER => true,
@@ -52,43 +53,23 @@ curl_setopt_array($curl, [
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => 'POST',
     CURLOPT_POSTFIELDS => [
-        'target' => $admin_number,$whatsapp,
-        'message' => $message,
-        'delay' => '2'
+        'target' => $whatsapp_number, $admin,
+        'message' => $message
     ],
     CURLOPT_HTTPHEADER => [
-        "Authorization: $fonnte_api_key"
+        "Authorization: $fonte_api_key"
     ],
 ]);
 
 $response = curl_exec($curl);
-$http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+if (curl_errno($curl)) {
+  $error_msg = curl_error($curl);
+}
 curl_close($curl);
 
-// Handle response
-if ($http_code == 200) {
-        // Response sukses
-    echo json_encode([
-        'alert' => 'Pendaftaran berhasil!',
-        'status' => 'success'
-    ]);
-    exit();
-
-} catch (Exception $e) {
-    http_response_code(400);
-    echo json_encode([
-        'alert' => 'Error: ' . $e->getMessage(),
-        'status' => 'error'
-    ]);
-    exit();
+if (isset($error_msg)) {
+ echo $error_msg;
 }
+echo $response;
 
-function getPackageName($price) {
-    switch ($price) {
-        case '45000': return 'STARTER - Rp 45.000';
-        case '95000': return 'BASIC - Rp 95.000';
-        case '135000': return 'PREMIUM - Rp 135.000';
-        default: return 'Paket Tidak Dikenal';
-    }
-}
-?>
+exit;
